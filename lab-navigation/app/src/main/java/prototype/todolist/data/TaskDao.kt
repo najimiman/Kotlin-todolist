@@ -1,6 +1,4 @@
-package com.example.myapplication.data
-
-//package prototype.todolist.data
+package prototype.todolist.data
 
 class TaskDao {
 
@@ -23,17 +21,17 @@ class TaskDao {
     fun insert(taskEntry: TaskEntry){
         taskEntry.id = ++TaskDao.task_count
         TaskDao.list_tasks.add(0,taskEntry)
-    }
+     }
 
-    fun delete(id: Int){
+     fun delete(id: Int){
         var index = this.findIndexById(id)
-        list_tasks.removeAt(index)
-    }
+         list_tasks.removeAt(index)
+     }
 
-    fun update(taskEntry: TaskEntry){
-        var index = this.findIndexById(taskEntry.id);
-        TaskDao.list_tasks[index] = taskEntry
-    }
+     fun update(taskEntry: TaskEntry){
+         var index = this.findIndexById(taskEntry.id);
+         TaskDao.list_tasks[index] = taskEntry
+     }
 
     private fun findIndexById(id: Int): Int {
         val index = TaskDao.list_tasks.withIndex().filter { it.value.id == id }.map{it.index}.first()

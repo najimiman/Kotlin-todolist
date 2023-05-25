@@ -1,6 +1,7 @@
-package com.example.myapplication.data
+package prototype.todolist.data
 
-class TaskRepository() {
+class TaskRepository () {
+
     private val taskDao = TaskDao()
     private fun insert(taskEntry: TaskEntry) = taskDao.insert(taskEntry)
     private fun update(taskEntry: TaskEntry) = taskDao.update(taskEntry)
