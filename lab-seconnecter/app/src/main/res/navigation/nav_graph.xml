@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/taskManagerFragment">
+
+    <fragment
+        android:id="@+id/taskFormFragment"
+        android:name="com.example.myapplication.ui.TaskFormFragment"
+        android:label="TaskFormFragment" >
+        <action
+            android:id="@+id/action_taskFormFragment_to_taskManagerFragment"
+            app:destination="@id/taskManagerFragment" />
+        <argument
+            android:name="taskid"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskManagerFragment"
+        android:name="com.example.myapplication.ui.TaskManagerFragment"
+        android:label="TaskManagerFragment" >
+        <action
+            android:id="@+id/action_taskManagerFragment_to_taskFormFragment"
+            app:destination="@id/taskFormFragment" />
+        <argument
+            android:name="taskid"
+            app:argType="integer" />
+    </fragment>
+</navigation>

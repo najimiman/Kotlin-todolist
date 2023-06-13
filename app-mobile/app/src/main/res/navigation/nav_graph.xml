@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/taskManagerFragment">
+
+    <fragment
+        android:id="@+id/taskManagerFragment"
+        android:name="prototype.todolist.ui.TourismeManagerFragment"
+        android:label="TaskManagerFragment" >
+        <action
+            android:id="@+id/action_taskManagerFragment_to_taskFormFragment"
+            app:destination="@id/taskFormFragment" />
+        <action
+            android:id="@+id/action_taskManagerFragment_to_loginFragmente"
+            app:destination="@id/loginFragmente" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFormFragment"
+        android:name="prototype.todolist.ui.TourismeFormFragment"
+        android:label="fragment_task_form"
+        tools:layout="@layout/fragment_task_form" >
+        <argument
+            android:name="taskid"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_taskFormFragment_to_taskManagerFragment"
+            app:destination="@id/taskManagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragmente"
+        android:name="prototype.todolist.ui.loginFragmente"
+        android:label="fragment_login_fragmente"
+        tools:layout="@layout/fragment_login_fragmente" >
+        <action
+            android:id="@+id/action_loginFragmente_to_taskManagerFragment"
+            app:destination="@id/taskManagerFragment" />
+    </fragment>
+
+</navigation>
