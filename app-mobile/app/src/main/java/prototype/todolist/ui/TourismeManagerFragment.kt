@@ -1,6 +1,7 @@
 package prototype.todolist.ui
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +15,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import prototype.todolist.LoginFragmentDirections
 import prototype.todolist.R
 import prototype.todolist.databinding.FragmentTaskFormBinding
 import prototype.todolist.databinding.FragmentTaskManagerBinding
@@ -27,6 +27,7 @@ class TourismeManagerFragment : BaseFragment<FragmentTaskManagerBinding>(Fragmen
     private lateinit var adapter: TourismeRecyclerViewAdapter
     private lateinit var recyclerView: RecyclerView
 
+
     override fun init(view: View) {
         this.setProgressBar(R.id.progressBar)
         adapter =  TourismeRecyclerViewAdapter(arrayListOf(), view.findNavController() )
@@ -34,6 +35,7 @@ class TourismeManagerFragment : BaseFragment<FragmentTaskManagerBinding>(Fragmen
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter =  adapter
         }
+
 
         // getUsers observe
         viewModel.getTasks().observe(viewLifecycleOwner, Observer {
@@ -59,6 +61,7 @@ class TourismeManagerFragment : BaseFragment<FragmentTaskManagerBinding>(Fragmen
                 val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToTaskFormFragment(taskid = 0 )
                 view.findNavController().navigate(action)
             }
+
         }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -73,7 +76,7 @@ class TourismeManagerFragment : BaseFragment<FragmentTaskManagerBinding>(Fragmen
 //                val action = TourismeManagerFragmentDirections.
 //                actionTaskManagerFragmentToTaskFormFragment(taskid = 0)
 //                recyclerView.findNavController().navigate(action)
-                val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToLoginFragment2()
+                val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToLoginFragmente()
                findNavController().navigate(action)
 
 //                Toast.makeText(this.activity,"Login",Toast.LENGTH_LONG).show()
