@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/taskManagerFragment"
         android:name="prototype.todolist.ui.TourismeManagerFragment"
-        android:label="TaskManagerFragment" >
+        android:label="Tourisme au Maroc" >
         <action
             android:id="@+id/action_taskManagerFragment_to_taskFormFragment"
             app:destination="@id/taskFormFragment" />

@@ -5,6 +5,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import prototype.todolist.dao.api.TourismeApiInterface
+import prototype.todolist.models.Favorite
 import prototype.todolist.models.Tourisme
 import prototype.todolist.models.User
 import retrofit2.Response
@@ -32,7 +33,7 @@ class TourismeDao {
 
     suspend fun delete(id : Int ) = apiService.delete(id)
 
-    suspend fun save(tourisme : Tourisme ) = apiService.save(tourisme)
+//    suspend fun save(favorite: Favorite ) = apiService.savefavorite(Favorite)
 
     suspend fun update(tourisme : Tourisme ) = apiService.update(tourisme.id, tourisme)
     //suspend fun login(user: User) = apiService.login(user)
@@ -48,4 +49,15 @@ class TourismeDao {
         val mediaType = "application/json".toMediaTypeOrNull()
         return requestBodyJson.toRequestBody(mediaType)
     }
+    suspend fun addTofavorite(favorite: Favorite): Response<Favorite> {
+        return try {
+            Log.d("response favo",favorite.toString())
+            apiService.savefavorite(favorite)
+        } catch (e: Exception) {
+            // Log the exception for debugging
+            Log.e("addTofavorite", "An error occurred: ${e.message}", e)
+            throw Exception("An error occurred while adding the meal to the cart: ${e.message}")
+        }
+    }
+
 }

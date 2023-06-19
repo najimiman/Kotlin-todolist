@@ -7,20 +7,26 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import prototype.todolist.R
+import prototype.todolist.models.Favorite
 import prototype.todolist.models.Tourisme
-import prototype.todolist.models.User
+import prototype.todolist.repositoryies.TourismeRepository
 
 
-class TourismeRecyclerViewAdapter(private val tasks: ArrayList<Tourisme>, navController: NavController )
+class TourismeRecyclerViewAdapter(private val Citys: ArrayList<Tourisme>, navController: NavController )
     : RecyclerView.Adapter<TourismeRecyclerViewAdapter.DataViewHolder>() {
 
-    var userId:Int  =0
+    var User_id:Int  =0
     private val navController = navController
+
+
 
     class DataViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById<Button>(R.id.taskTitle)
@@ -29,12 +35,12 @@ class TourismeRecyclerViewAdapter(private val tasks: ArrayList<Tourisme>, navCon
         val cardView: CardView = view.findViewById(R.id.cardview)
         val imagev: ImageView = view.findViewById<ImageView>(R.id.imageView1)
         val buttonfavorite:Button=view.findViewById<Button>(R.id.buttonfavorite)
-        fun bind(task: Tourisme) {
-            name.text = task.nom.toString()
-            city.text = task.city.toString()
+            fun bind(tourisme: Tourisme) {
+            name.text = tourisme.nom.toString()
+            city.text = tourisme.city.toString()
 //            taskTimestamp.text = task.timestamp.toString()
 //            imagev.setImageResource(task.image)
-            val imageUrl = "http://192.168.56.1:8000/les images de tourisme/${task.image}"
+            val imageUrl = "http://192.168.56.1:8000/les images de tourisme/${tourisme.image}"
 
 //            Log.d("img", meal.img.toString())
 //            Picasso.get().load(imageUrl).into(mealImg)
@@ -53,30 +59,41 @@ class TourismeRecyclerViewAdapter(private val tasks: ArrayList<Tourisme>, navCon
     }
 
 
-    override fun getItemCount(): Int  = tasks.size
+    override fun getItemCount(): Int  = Citys.size
 
     override fun onBindViewHolder(dataViewHolder: DataViewHolder, position: Int) {
 
-        val task = tasks[position]
-        dataViewHolder.bind(task)
+        val city = Citys[position]
+        dataViewHolder.bind(city)
 
         dataViewHolder.cardView.setOnClickListener {
             // update
-            val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToTaskFormFragment(taskid = task.id )
+            val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToTaskFormFragment(taskid = city.id )
             navController.navigate(action)
         }
         dataViewHolder.buttonfavorite.setOnClickListener {
             val prefs = dataViewHolder.itemView.context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-            userId = prefs.getInt("userId", 0)
-            Log.d("userId", userId.toString())
+            User_id = prefs.getInt("userId", 0)
+            Log.d("userId", User_id.toString())
+            Log.d("ocdeId", city.id.toString())
+            val cityplagesId=city.id.toString()
+//            Log.e("rrr","hello")
+            GlobalScope.launch(Dispatchers.Main) {
+//            val favorite = Favorite(id = 0,cityplagesId = cityplagesId.toString().toInt(), UserId = UserId)
+                val favoritee = Favorite(0,city.id.toString().toInt(), User_id )
+                Log.d("favoritee",favoritee.toString())
+                TourismeRepository().save(favoritee)
+                notifyDataSetChanged()
+            }
+
 
         }
     }
 
-    fun addTasks(tasks: List<Tourisme>) {
-        this.tasks.apply {
+    fun addCity(citys: List<Tourisme>) {
+        this.Citys.apply {
             clear()
-            addAll(tasks)
+            addAll(citys)
         }
 
     }

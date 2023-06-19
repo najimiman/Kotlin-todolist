@@ -66,8 +66,16 @@ class loginFragmente : BaseFragment<FragmentLoginFragmenteBinding>(FragmentLogin
                     if (response.isSuccessful) {
                         val user: User? = response.body()
                         val userData: Map<String, Any>? = user?.user
-                        val userId: Int? = userData?.get("id") as? Int
-                        Log.d("User ID", userData?.get("id").toString())
+//                        val userId: Int? = userData?.get("id") as? Int
+//                        Log.d("User ID", userData?.get("id").toString())
+                        val userId: Int? = (userData?.get("id") as? Double)?.toInt()
+                        Log.d("User ID", userId.toString())
+                        val prefs = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+                        prefs.edit().putInt("userId", userId.toString().toInt()).apply()
+                        val action = loginFragmenteDirections.actionLoginFragmenteToTaskManagerFragment()
+                        findNavController().navigate(action)
+
+
                         // Use the userId as needed
                     } else {
                         Log.d("ResponseError", response.message())

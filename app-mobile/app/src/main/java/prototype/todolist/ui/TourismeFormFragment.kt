@@ -80,22 +80,20 @@ class TourismeFormFragment : BaseFragment<FragmentTaskFormBinding>(FragmentTaskF
 
                 )
 
-                viewModel.save(task).observe(viewLifecycleOwner, Observer {
-                    when (it.status) {
-                        Status.LOADING -> showProgressBar()
-                        Status.ERROR -> showResponseError(it.message.toString())
-                        Status.SUCCESS -> {
-                            binding.form.visibility = View.VISIBLE
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
-                            val action = TourismeFormFragmentDirections.actionTaskFormFragmentToTaskManagerFragment()
-                            view.findNavController().navigate(action)
-                        }
-                    }
-                })
+//                viewModel.save(task).observe(viewLifecycleOwner, Observer {
+//                    when (it.status) {
+//                        Status.LOADING -> showProgressBar()
+//                        Status.ERROR -> showResponseError(it.message.toString())
+//                        Status.SUCCESS -> {
+//                            binding.form.visibility = View.VISIBLE
+//                            binding.progressBar.visibility = View.GONE
+//                            Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
+//                            val action = TourismeFormFragmentDirections.actionTaskFormFragmentToTaskManagerFragment()
+//                            view.findNavController().navigate(action)
+//                        }
+//                    }
+//                })
 //
-
-
             }
             btnDelete.setOnClickListener {
                 viewModel.delete(taskId).observe(viewLifecycleOwner, Observer {

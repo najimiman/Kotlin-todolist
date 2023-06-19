@@ -1,7 +1,9 @@
 package prototype.todolist.repositoryies
 
 
+import android.util.Log
 import prototype.todolist.dao.TourismeDao
+import prototype.todolist.models.Favorite
 import prototype.todolist.models.Tourisme
 import prototype.todolist.models.User
 
@@ -15,15 +17,16 @@ class TourismeRepository () {
 
     suspend fun delete(id : Int) = tourismeDao.delete(id)
 
-    suspend fun save(tourisme : Tourisme){
-        if(tourisme.id == 0){
+    suspend fun save(favorite: Favorite){
+        if(favorite.id == 0){
             // save
-            tourismeDao.save(tourisme)
-        }else{
-            // update
-            tourismeDao.update(tourisme)
+            tourismeDao.addTofavorite(favorite)
         }
-
-    }
+//        else{
+//            // update
+//            tourismeDao.update(tourisme = Tourisme())
+//        }
+//
+   }
 //    suspend fun login(user: User) = tourismeDao.login(email = String(), password = String())
 }

@@ -1,6 +1,7 @@
 package prototype.todolist.dao.api
 
 import okhttp3.RequestBody
+import prototype.todolist.models.Favorite
 import prototype.todolist.models.Tourisme
 import prototype.todolist.models.User
 import retrofit2.Response
@@ -24,7 +25,7 @@ interface TourismeApiInterface {
     suspend fun delete(@Path("id") id : Int) : Int
 
     @POST("addfavorite/")
-    suspend fun save(@Body tourisme : Tourisme) : Tourisme
+    suspend fun savefavorite(@Body favorite: Favorite) : Response<Favorite>
 
     @PATCH("edit/{id}")
     suspend fun update(@Path("id") id : Int, @Body tourisme : Tourisme) : Tourisme

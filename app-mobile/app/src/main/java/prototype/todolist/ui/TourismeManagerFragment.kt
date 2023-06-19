@@ -46,7 +46,7 @@ class TourismeManagerFragment : BaseFragment<FragmentTaskManagerBinding>(Fragmen
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                     adapter.apply {
-                        addTasks(it.data!!)
+                        addCity(it.data!!)
                         notifyDataSetChanged()
                     }
                 }
@@ -55,18 +55,19 @@ class TourismeManagerFragment : BaseFragment<FragmentTaskManagerBinding>(Fragmen
 
     }
 
+
     override fun listeners(view: View) {
         binding.apply {
-            floatingActionButton.setOnClickListener{
-                val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToTaskFormFragment(taskid = 0 )
-                view.findNavController().navigate(action)
-            }
+//            floatingActionButton.setOnClickListener{
+//                val action = TourismeManagerFragmentDirections.actionTaskManagerFragmentToTaskFormFragment(taskid = 0 )
+//                view.findNavController().navigate(action)
+//            }
 
         }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.item_menu_add -> {
+            R.id.item_menu_favorite -> {
                 val action = TourismeManagerFragmentDirections.
                 actionTaskManagerFragmentToTaskFormFragment(taskid = 0)
                     recyclerView.findNavController().navigate(action)

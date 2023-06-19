@@ -40,14 +40,14 @@ class TourismeViewModel : ViewModel()  {
         }
     }
 
-    fun save(tourisme: Tourisme) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = tourismeRepository.save(tourisme)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-        }
-    }
+//    fun save(tourisme: Tourisme) = liveData(Dispatchers.IO) {
+//        emit(Resource.loading(data = null))
+//        try {
+//            emit(Resource.success(data = tourismeRepository.save(tourisme)))
+//        } catch (exception: Exception) {
+//            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+//        }
+//    }
 //    fun login(user: User) = liveData(Dispatchers.IO) {
 //        emit(Resource.loading(data=null))
 //        try {
